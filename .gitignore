@@ -1,0 +1,7 @@
+.idea
+
+built
+node_modules
+output
+
+.env

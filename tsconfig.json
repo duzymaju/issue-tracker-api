@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "built",
+    "allowJs": false,
+    "target": "es6",
+    "lib": [ "es6" ],
+    "types": [ "node", "reflect-metadata", "jest" ]
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

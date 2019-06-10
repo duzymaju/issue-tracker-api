@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  issue_tracker_db:
+    container_name: issue-tracker-db
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: docker
+      MYSQL_DATABASE: issue-tracker
+      MYSQL_USER: user
+      MYSQL_PASSWORD: pass
+    ports:
+      - "3306:3306"
