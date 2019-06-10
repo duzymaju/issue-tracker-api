@@ -29,7 +29,7 @@ export class IssuesController implements interfaces.Controller {
         const allowedMethods = 'GET,POST';
         response.setHeader('Access-Control-Allow-Origin', this.origin);
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        response.setHeader('Allow', allowedMethods);
+        response.setHeader('Access-Control-Allow-Methods', allowedMethods);
         response.setHeader('Content-Length', allowedMethods.length);
         return allowedMethods;
     }
@@ -65,7 +65,7 @@ export class IssuesController implements interfaces.Controller {
         const allowedMethods = 'PATCH';
         response.setHeader('Access-Control-Allow-Origin', this.origin);
         response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-        response.setHeader('Allow', allowedMethods);
+        response.setHeader('Access-Control-Allow-Methods', allowedMethods);
         response.setHeader('Content-Length', allowedMethods.length);
         return allowedMethods;
     }

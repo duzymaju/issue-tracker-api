@@ -222,7 +222,7 @@ describe(`IssuesController test`, () => {
             const result = await controller.issuesOptions(responseMock as any);
             expect(responseMock.setHeader).toHaveBeenNthCalledWith(1, 'Access-Control-Allow-Origin', '*');
             expect(responseMock.setHeader).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Content-Type');
-            expect(responseMock.setHeader).toHaveBeenNthCalledWith(3, 'Allow', allowedMethods);
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(3, 'Access-Control-Allow-Methods', allowedMethods);
             expect(responseMock.setHeader).toHaveBeenNthCalledWith(4, 'Content-Length', allowedMethods.length);
             return expect(result).toEqual(allowedMethods);
         });
@@ -232,7 +232,7 @@ describe(`IssuesController test`, () => {
             const result = await controller.issueOptions(responseMock as any);
             expect(responseMock.setHeader).toHaveBeenNthCalledWith(1, 'Access-Control-Allow-Origin', '*');
             expect(responseMock.setHeader).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Content-Type');
-            expect(responseMock.setHeader).toHaveBeenNthCalledWith(3, 'Allow', allowedMethods);
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(3, 'Access-Control-Allow-Methods', allowedMethods);
             expect(responseMock.setHeader).toHaveBeenNthCalledWith(4, 'Content-Length', allowedMethods.length);
             return expect(result).toEqual(allowedMethods);
         });
