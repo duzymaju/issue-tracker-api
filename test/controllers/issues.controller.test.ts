@@ -23,8 +23,8 @@ describe(`IssuesController test`, () => {
             repositoryMock.getList.mockResolvedValue(list);
             const result = await controller.list(responseMock as any);
             expect(result).toEqual(list);
-            expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
-            return expect(repositoryMock.getList).toBeCalledWith();
+            expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
+            return expect(repositoryMock.getList).toHaveBeenCalledWith();
         });
     });
 
@@ -35,7 +35,7 @@ describe(`IssuesController test`, () => {
                 throw Error('Unexpected success.');
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -86,8 +86,8 @@ describe(`IssuesController test`, () => {
                 { description: issue.description, title: issue.title } as any, responseMock as any,
             );
             expect(result).toEqual(issue);
-            expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
-            return expect(repositoryMock.create).toBeCalledWith(issue.title, issue.description);
+            expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
+            return expect(repositoryMock.create).toHaveBeenCalledWith(issue.title, issue.description);
         });
     });
 
@@ -100,7 +100,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(NOT_FOUND);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -113,7 +113,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(BAD_REQUEST);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -126,7 +126,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(BAD_REQUEST);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -139,7 +139,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(BAD_REQUEST);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -152,7 +152,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(BAD_REQUEST);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -165,7 +165,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(BAD_REQUEST);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -178,7 +178,7 @@ describe(`IssuesController test`, () => {
             } catch (error) {
                 expect(error).toBeInstanceOf(HttpResponseException);
                 expect(error.statusCode).toEqual(BAD_REQUEST);
-                expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
+                expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
             }
         });
 
@@ -189,8 +189,8 @@ describe(`IssuesController test`, () => {
             const result = await controller.update(1, { state: State.PENDING } as any, responseMock as any);
             expect(result).toEqual(issue);
             expect(result.state).toEqual(State.PENDING);
-            expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
-            return expect(repositoryMock.update).toBeCalledWith(issue);
+            expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
+            return expect(repositoryMock.update).toHaveBeenCalledWith(issue);
         });
 
         it(`modifies issue's state (OPEN -> CLOSED)`, async () => {
@@ -200,8 +200,8 @@ describe(`IssuesController test`, () => {
             const result = await controller.update(1, { state: State.CLOSED } as any, responseMock as any);
             expect(result).toEqual(issue);
             expect(result.state).toEqual(State.CLOSED);
-            expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
-            return expect(repositoryMock.update).toBeCalledWith(issue);
+            expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
+            return expect(repositoryMock.update).toHaveBeenCalledWith(issue);
         });
 
         it(`modifies issue's state (PENDING -> CLOSED)`, async () => {
@@ -211,8 +211,30 @@ describe(`IssuesController test`, () => {
             const result = await controller.update(1, { state: State.CLOSED } as any, responseMock as any);
             expect(result).toEqual(issue);
             expect(result.state).toEqual(State.CLOSED);
-            expect(responseMock.setHeader).toBeCalledWith('Access-Control-Allow-Origin', '*');
-            return expect(repositoryMock.update).toBeCalledWith(issue);
+            expect(responseMock.setHeader).toHaveBeenCalledWith('Access-Control-Allow-Origin', '*');
+            return expect(repositoryMock.update).toHaveBeenCalledWith(issue);
+        });
+    });
+
+    describe(`options test`, () => {
+        it(`returns issues options`, async () => {
+            const allowedMethods = 'GET,POST';
+            const result = await controller.issuesOptions(responseMock as any);
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(1, 'Access-Control-Allow-Origin', '*');
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Content-Type');
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(3, 'Allow', allowedMethods);
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(4, 'Content-Length', allowedMethods.length);
+            return expect(result).toEqual(allowedMethods);
+        });
+
+        it(`returns issue options`, async () => {
+            const allowedMethods = 'PATCH';
+            const result = await controller.issueOptions(responseMock as any);
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(1, 'Access-Control-Allow-Origin', '*');
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(2, 'Access-Control-Allow-Headers', 'Content-Type');
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(3, 'Allow', allowedMethods);
+            expect(responseMock.setHeader).toHaveBeenNthCalledWith(4, 'Content-Length', allowedMethods.length);
+            return expect(result).toEqual(allowedMethods);
         });
     });
 });

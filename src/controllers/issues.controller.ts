@@ -2,7 +2,7 @@ import { Response } from 'express';
 import { BAD_REQUEST, NOT_FOUND } from 'http-status-codes';
 import { inject, LazyServiceIdentifer } from 'inversify';
 import {
-    controller, httpGet, httpPatch, httpPost, interfaces, requestBody, requestParam, response,
+    controller, httpGet, httpMethod, httpPatch, httpPost, interfaces, requestBody, requestParam, response,
 } from 'inversify-express-utils';
 import { env } from 'process';
 import { IssueEntity } from '../entities/issue.entity';
@@ -20,6 +20,18 @@ export class IssuesController implements interfaces.Controller {
     ) {
         this.repository = repository;
         this.origin = env.CLIENT_ORIGIN || '*';
+    }
+
+    @httpMethod('options', '/')
+    public issuesOptions(
+        @response() response: Response,
+    ): string {
+        const allowedMethods = 'GET,POST';
+        response.setHeader('Access-Control-Allow-Origin', this.origin);
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        response.setHeader('Allow', allowedMethods);
+        response.setHeader('Content-Length', allowedMethods.length);
+        return allowedMethods;
     }
 
     @httpGet('/')
@@ -44,6 +56,18 @@ export class IssuesController implements interfaces.Controller {
             throw new HttpResponseException(BAD_REQUEST, 'Description invalid.');
         }
         return this.repository.create(title, description);
+    }
+
+    @httpMethod('options', '/:id')
+    public issueOptions(
+        @response() response: Response,
+    ): string {
+        const allowedMethods = 'PATCH';
+        response.setHeader('Access-Control-Allow-Origin', this.origin);
+        response.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+        response.setHeader('Allow', allowedMethods);
+        response.setHeader('Content-Length', allowedMethods.length);
+        return allowedMethods;
     }
 
     @httpPatch('/:id')

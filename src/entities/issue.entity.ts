@@ -12,6 +12,6 @@ export class IssueEntity {
     @Column({ length: 200, type: 'varchar' })
     description: string;
 
-    @Column({ length: 10, type: 'varchar' })
+    @Column({ default: State.OPEN, enum: State, type: 'enum' })
     state: State;
 }
