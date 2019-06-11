@@ -5,9 +5,10 @@
   "scripts": {
     "build": "npm run lint && tsc",
     "dev": "npm run build && npm start",
-    "start": "node built/server.js",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "lint-fix": "npm run lint -- --fix \"./{src,test}/{**/*,*}.ts\"",
+    "migrations": "tsc && npm run typeorm migration:run",
+    "start": "node built/server.js",
     "test": "jest",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js"
   },
