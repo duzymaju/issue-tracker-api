@@ -49,10 +49,10 @@ export class IssuesController implements interfaces.Controller {
     ): Promise<IssueEntity> {
         response.setHeader('Access-Control-Allow-Origin', this.origin);
         // @TODO: Add validation (e.g. joi) based on decorators if necessary
-        if (typeof title !== 'string' || title.length === 0) {
+        if (typeof title !== 'string' || title.length === 0 || title.length > 100) {
             throw new HttpResponseException(BAD_REQUEST, 'Title invalid.');
         }
-        if (typeof description !== 'string' || description.length === 0) {
+        if (typeof description !== 'string' || description.length === 0 || description.length > 200) {
             throw new HttpResponseException(BAD_REQUEST, 'Description invalid.');
         }
         return this.repository.create(title, description);
