@@ -10,7 +10,6 @@ import { IssueRepositoryInterface } from './interfaces/issue.repository.interfac
 @injectable()
 export class IssueRepository implements IssueRepositoryInterface {
     private readonly connection: DatabaseConnectionInterface;
-    private manager?: Repository<IssueEntity>;
 
     public constructor(
         @inject(new LazyServiceIdentifer(() => DatabaseConnectionType)) connection: DatabaseConnectionInterface,
@@ -43,11 +42,7 @@ export class IssueRepository implements IssueRepositoryInterface {
         return manager.save(issue);
     }
 
-    private async getManager(): Promise<Repository<IssueEntity>> {
-        if (!this.manager) {
-            const connection = await this.connection.get();
-            this.manager = connection.getRepository(IssueEntity);
-        }
-        return this.manager;
+    private getManager(): Promise<Repository<IssueEntity>> {
+        return this.connection.getManager(IssueEntity);
     }
 }

@@ -1,7 +1,7 @@
-import { Connection } from 'typeorm';
+import { ObjectType, Repository } from 'typeorm';
 
 export const DatabaseConnectionType = Symbol('DatabaseConnection');
 
 export interface DatabaseConnectionInterface {
-    get(): Promise<Connection>;
+    getManager<Entity>(target: ObjectType<Entity>): Promise<Repository<Entity>>;
 }
